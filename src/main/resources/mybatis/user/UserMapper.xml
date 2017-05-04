@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.data.dao.UserDao">
+    <select id="findByEmail" parameterType="java.lang.String" resultType="com.system.data.entity.User">
+        SELECT * FROM user WHERE email = #{email}
+    </select>
+
+    <insert id="add" parameterType="com.system.data.entity.User">
+        INSERT INTO user
+        (email, password, name, gender, profession, address, status)
+        VALUES
+        (#{data.email}, #{data.password}, #{data.name}, #{data.gender}, #{data.profession}, #{data.address}, #{data.status})
+    </insert>
+
+    <update id="update" parameterType="com.system.data.entity.User">
+        UPDATE user
+        <set>
+            <if test="data.password != null">password = #{data.password},</if>
+            <if test="data.profession != null">profession = #{data.profession},</if>
+            <if test="data.address != null">address = #{data.address},</if>
+            <if test="data.status != null">status = #{data.status},</if>
+        </set>
+        <where>
+            id = #{data.id}
+        </where>
+    </update>
+    
+    <select id="page" resultType="com.system.data.entity.User">
+        SELECT * FROM user
+        <if test="status != null">
+            WHERE status = #{status}
+        </if>
+        LIMIT #{start}, #{offset};
+    </select>
+    
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*) FROM user
+        <if test="status != null">
+            WHERE status = #{status}
+        </if>
+    </select>
+
+
+    <select id="find" resultType="com.system.data.entity.User">
+        SELECT * FROM user WHERE id = #{id}
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
+</mapper>

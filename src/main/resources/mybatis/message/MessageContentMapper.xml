@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.data.dao.MessageContentDao">
+    <insert id="add" parameterType="com.system.data.entity.Message" keyProperty="data.contentId" useGeneratedKeys="true">
+        INSERT INTO message_content
+        (content)
+        VALUES
+        (#{data.content})
+    </insert>
+
+    <update id="update" parameterType="com.system.data.entity.Message">
+        UPDATE message_content
+        <set>
+            <if test="data.content != null">content = #{data.content}</if>
+        </set>
+        <where>
+            id = #{data.contentId}
+        </where>
+    </update>
+</mapper>

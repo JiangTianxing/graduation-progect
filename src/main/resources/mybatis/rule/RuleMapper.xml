@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.data.dao.RuleDao">
+    <insert id="add" parameterType="com.system.data.entity.Rule">
+      INSERT INTO rule
+        (title, description, filename, path, md5, status, savetime, updatetime)
+      VALUES
+        (#{data.title}, #{data.description}, #{data.filename}, #{data.path}, #{data.md5}, #{data.status}, now(), now())
+    </insert>
+    
+    <update id="update" parameterType="com.system.data.entity.Rule">
+        UPDATE rule
+        <set>
+            <if test="data.title != null">title = #{data.title},</if>
+            <if test="data.description != null">description = #{data.description},</if>
+            <if test="data.filename != null">filename = #{data.filename},</if>
+            <if test="data.path != null">path = #{data.path},</if>
+            <if test="data.md5 != null">md5 = #{data.md5},</if>
+            <if test="data.status != null">status = #{data.status},</if>
+            updatetime = now()
+        </set>
+        <where>
+            id = #{data.id}
+        </where>
+    </update>
+    
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*) FROM rule
+        <if test="status != null">
+          WHERE status = #{status}
+        </if>
+    </select>
+
+    <select id="page" resultType="com.system.data.entity.Rule">
+        SELECT id, title, description, filename, path, md5, status, savetime, updatetime FROM rule
+        <if test="status != null">
+            WHERE status = #{status}
+        </if>
+        LIMIT #{start}, #{offset}
+    </select>
+
+    <select id="findByMd5" resultType="com.system.data.entity.Rule">
+        SELECT id, title, description, filename, path, md5, status, savetime, updatetime FROM rule WHERE md5 = #{md5}
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <select id="find" resultType="com.system.data.entity.Rule">
+        SELECT id, title, description, filename, path, md5, status, savetime, updatetime FROM rule WHERE id = #{id}
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+    
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM rule WHERE id = #{id}
+    </delete>
+</mapper>

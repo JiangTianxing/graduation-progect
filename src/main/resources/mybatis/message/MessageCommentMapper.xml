@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.data.dao.CommentDao">
+   <select id="select" parameterType="java.lang.Integer" resultType="com.system.data.entity.Comment">
+       SELECT * FROM message_comment WHERE messageId = #{messageId}
+   </select>
+   
+    <insert id="add" parameterType="com.system.data.entity.Comment">
+        INSERT INTO comment
+        (messageId, email, name, pid, content, savetime)
+        VALUES
+        (#{data.messageId}, #{data.email}, #{data.name}, #{data.pid}, #{data.content}, now())
+    </insert>
+</mapper>
