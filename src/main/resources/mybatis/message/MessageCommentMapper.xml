@@ -5,10 +5,14 @@
        SELECT * FROM message_comment WHERE messageId = #{messageId}
    </select>
    
-    <insert id="add" parameterType="com.system.data.entity.Comment">
-        INSERT INTO comment
+    <insert id="add" parameterType="com.system.data.entity.Comment" keyProperty="data.id" useGeneratedKeys="true">
+        INSERT INTO message_comment
         (messageId, email, name, pid, content, savetime)
         VALUES
         (#{data.messageId}, #{data.email}, #{data.name}, #{data.pid}, #{data.content}, now())
     </insert>
+    
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM message_comment WHERE id = #{id}
+    </delete>
 </mapper>

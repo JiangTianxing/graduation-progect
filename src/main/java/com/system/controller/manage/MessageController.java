@@ -1,5 +1,7 @@
 package com.system.controller.manage;
 
+import com.system.core.annotation.Before;
+import com.system.core.interceptor.ManagerLoginInterceptor;
 import com.system.core.util.FormConst;
 import com.system.data.dto.Page;
 import com.system.data.entity.Message;
@@ -22,6 +24,7 @@ import java.util.Optional;
  */
 @Controller("ManageMessageController")
 @RequestMapping("/manage/message")
+@Before(ManagerLoginInterceptor.class)
 public class MessageController {
     private final String TEMPLATE = "manage/message/";
 

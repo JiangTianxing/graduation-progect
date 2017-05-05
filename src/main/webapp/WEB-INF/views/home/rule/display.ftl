@@ -29,11 +29,9 @@
                             <button type="button" class="btn btn-primary">下载</button>
                         </a>
                     <#else>
-                        <a href="${base}/admin/login">
-                            <button type="button" class="btn btn-primary">
-                                登陆后下载
-                            </button>
-                        </a>
+                        <button type="button" class="btn btn-primary close" data-dismiss="modal" aria-label="Close">
+                            登陆后下载
+                        </button>
                     </#if>
                 </div>
             </div>

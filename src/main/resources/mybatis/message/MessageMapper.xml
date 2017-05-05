@@ -39,7 +39,7 @@
         message_content c
         <where>
         <if test="status != null">n.status = #{status} AND </if>
-        <if test="userId != null">n.userId = #{userId} AND </if>
+        n.userId = #{userId} AND
             c.id = n.contentId
         </where>
         limit #{start},#{offset};

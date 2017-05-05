@@ -4,7 +4,7 @@
     <#list rules as rule>
         <div class="panel-body">
             <a id="modal-1" href="#modal-container-${rule.id}" role="button" class="btn" data-toggle="modal">
-                ${rule.title}
+            ${rule.title}
             </a>
             <span>${rule.savetime?string("yyyy年MM月dd日 HH:mm:ss")}</span>
         </div>
@@ -25,11 +25,9 @@
                                 <button type="button" class="btn btn-primary">下载</button>
                             </a>
                         <#else>
-                            <a href="${base}/admin/login">
-                                <button type="button" class="btn btn-primary">
-                                    登陆后下载
-                                </button>
-                            </a>
+                            <button type="button" class="btn btn-primary close" data-dismiss="modal" aria-label="Close">
+                                登陆后下载
+                            </button>
                         </#if>
                     </div>
                 </div>

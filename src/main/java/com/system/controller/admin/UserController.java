@@ -1,6 +1,9 @@
 package com.system.controller.admin;
 
+import com.system.core.annotation.Before;
+import com.system.core.interceptor.UserLoginInterceptor;
 import com.system.core.util.Const;
+import com.system.core.util.FormConst;
 import com.system.core.util.HttpStatus;
 import com.system.core.util.SessionUtil;
 import com.system.data.entity.Result;
@@ -27,6 +30,7 @@ import java.util.Map;
  */
 @Controller("AdminUserController")
 @RequestMapping("/admin/user")
+@Before(UserLoginInterceptor.class)
 public class UserController {
 
     private final String TEMPLATE = "admin/user/";
@@ -53,6 +57,8 @@ public class UserController {
                            Errors errors) {
         if (errors.hasErrors()) return Result.returnError(errors);
         if (!user.checkPasswordIfSame()) return Result.returnJson(HttpStatus.ERROR, "两次密码不一致", null);
+        User updateUser = user.getUser();
+        updateUser.setStatus(FormConst.STATUS.SAVE.getValue());
         userService.update(user.getUser());
         Map<String, Object> data = new HashMap<>();
         String url = Const.PROJECT_PATH + "/admin/user/";

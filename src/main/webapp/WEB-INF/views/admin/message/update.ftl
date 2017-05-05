@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <title>${SITE_NAME}</title>
 <#include "/common/css.ftl"/>
     <link rel="stylesheet" href="${base}/res/js/kindeditor/themes/default/default.css" />
     <link rel="stylesheet" href="${base}/res/js/kindeditor/plugins/code/prettify.css" />
@@ -21,10 +20,10 @@
 <div class="container">
     <div class="row">
         <h3 class="text-center">
-            法律人信息交流平台
+            律政沙龙修改
         </h3>
         <div class="col-md-12">
-        <#include "/admin/common/nav.ftl"/>
+
             <div class="span12">
                 <form method="post" name="example">
                     <input type="hidden" name="id" value="${message.id}">
@@ -61,7 +60,10 @@
                 if (result.status != 200) {
                     dialog.error(result.message);
                 } else {
-                    dialog.success(result.message, result.data.url);
+                    layer.open({
+                        content:result.message,
+                        icon:1
+                    });
                 }
             }, 'json');
         }

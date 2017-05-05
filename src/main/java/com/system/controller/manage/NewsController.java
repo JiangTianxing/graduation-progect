@@ -1,5 +1,7 @@
 package com.system.controller.manage;
 
+import com.system.core.annotation.Before;
+import com.system.core.interceptor.ManagerLoginInterceptor;
 import com.system.core.util.Const;
 import com.system.core.util.FormConst;
 import com.system.core.util.HttpStatus;
@@ -24,6 +26,7 @@ import java.util.*;
  */
 @Controller("AdminNewsController")
 @RequestMapping("/manage/news")
+@Before(ManagerLoginInterceptor.class)
 public class NewsController {
 
     private final String TEMPLATE = "manage/news/";

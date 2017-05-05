@@ -15,13 +15,16 @@
     <update id="update" parameterType="com.system.data.entity.User">
         UPDATE user
         <set>
+            <if test="data.name != null">name = #{data.name},</if>
+            <if test="data.email != null">email = #{data.email},</if>
+            <if test="data.gender != null">gender = #{data.gender},</if>
             <if test="data.password != null">password = #{data.password},</if>
             <if test="data.profession != null">profession = #{data.profession},</if>
             <if test="data.address != null">address = #{data.address},</if>
-            <if test="data.status != null">status = #{data.status},</if>
+            <if test="data.status != null">status = #{data.status}</if>
         </set>
         <where>
-            id = #{data.id}
+            email = #{data.email}
         </where>
     </update>
     

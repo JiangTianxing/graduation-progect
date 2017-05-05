@@ -1,5 +1,7 @@
 package com.system.controller.admin;
 
+import com.system.core.annotation.Before;
+import com.system.core.interceptor.UserLoginInterceptor;
 import com.system.core.util.Const;
 import com.system.core.util.FormConst;
 import com.system.core.util.HttpStatus;
@@ -9,7 +11,6 @@ import com.system.data.entity.*;
 import com.system.data.service.CommentService;
 import com.system.data.service.MessageService;
 import com.system.data.service.WebsiteService;
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -28,6 +29,7 @@ import java.util.Optional;
  */
 @Controller("AdminMessageController")
 @RequestMapping("/admin/message")
+@Before(UserLoginInterceptor.class)
 public class MessageController {
 
     private final String TEMPLATE = "admin/message/";
@@ -68,7 +70,7 @@ public class MessageController {
         message.setName(user.getName());
         message.setEmail(user.getEmail());
         messageService.save(message);
-        String url = Const.PROJECT_PATH + "/manage/message/";
+        String url = Const.PROJECT_PATH + "/admin/message/";
         Map<String, Object> data = new HashMap<>();
         data.put("url", url);
         return Result.returnJson(HttpStatus.SUCCESS, "保存成功", data);
@@ -134,17 +136,28 @@ public class MessageController {
         return "redirect:" + refer;
     }
 
-    @RequestMapping(value = "/comment/{commentId}", method = RequestMethod.POST)
-    public Result comment(@PathParam("commentId") Optional<Integer> commentId,
+    @ResponseBody
+    @RequestMapping(value = "/comment/{messageId}", method = RequestMethod.POST)
+    public Result comment(@PathVariable("messageId") Optional<Integer> messageId,
                           @Valid Comment comment,
                           Errors errors) {
         if (errors.hasErrors()) return Result.returnError(errors);
-        Integer id = commentId.isPresent() ? commentId.get() : 1;
+        Integer id = messageId.isPresent() ? messageId.get() : 1;
         comment.setMessageId(id);
         commentService.add(comment);
-        Map<String, Object> data = new HashedMap();
-        data.put("pid", comment.getPid());
-        data.put("content", comment.getContent());
+        comment.setSavetime(new Date());
+        Map<String, Object> data = new HashMap<>();
+        data.put("data", comment);
         return Result.returnJson(HttpStatus.SUCCESS, "评论成功", data);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/comment/delete/{commentId}")
+    public Result deleteComment(@PathVariable("commentId") Optional<Integer> commentId) {
+        if (commentId.isPresent()) {
+            commentService.delete(commentId.get());
+            return Result.returnJson(HttpStatus.SUCCESS, "删除成功", null);
+        }
+        return Result.returnJson(HttpStatus.ERROR, "评论不存在", null);
     }
 }

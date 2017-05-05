@@ -1,5 +1,7 @@
 package com.system.controller.manage;
 
+import com.system.core.annotation.Before;
+import com.system.core.interceptor.ManagerLoginInterceptor;
 import com.system.core.util.FormConst;
 import com.system.data.dto.Page;
 import com.system.data.entity.User;
@@ -21,6 +23,7 @@ import java.util.Optional;
  */
 @Controller("ManageUserController")
 @RequestMapping("/manage/user")
+@Before(ManagerLoginInterceptor.class)
 public class UserController {
 
     private final String TEMPLATE = "manage/user/";

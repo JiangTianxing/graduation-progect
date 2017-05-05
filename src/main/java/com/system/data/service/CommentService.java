@@ -18,6 +18,8 @@ public class CommentService {
 
     public List<Comment> select(Integer messageId) {
         List<Comment> list = commentDao.select(messageId);
+        if (list == null || list.size() == 0)
+            return null;
         Map<Integer, List<Comment>> result = new HashMap<>();
         for (Comment l : list) {
             List<Comment> level = result.get(l.getPid());
@@ -45,5 +47,7 @@ public class CommentService {
         return commentDao.add(data);
     }
 
-
+    public boolean delete(Integer id) {
+        return commentDao.delete(id);
+    }
 }

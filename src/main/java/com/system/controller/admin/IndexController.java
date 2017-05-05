@@ -47,11 +47,6 @@ public class IndexController {
         return TEMPLATE + "index";
     }
 
-    @RequestMapping("/login")
-    public String login() {
-        return "admin/login/index";
-    }
-
     @ResponseBody
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
     public Result doLogin(HttpServletRequest request,
@@ -90,7 +85,6 @@ public class IndexController {
         if (checkUser != null) return Result.returnJson(HttpStatus.ERROR, "该邮箱已注册", null);
         user.setPassword(password);
         userService.add(user);
-        SessionUtil.setAttr(request, Const.USER, user);
         String redirectUrl = Const.PROJECT_PATH + "/";
         Map<String, Object> data = new HashMap<>();
         data.put("url", redirectUrl);

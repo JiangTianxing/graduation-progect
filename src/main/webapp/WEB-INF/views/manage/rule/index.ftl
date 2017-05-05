@@ -62,9 +62,9 @@
         $('#hidden-window-title').val(title);
         $('#hidden-window-description').val(description);
     }
-    var update = function () {
+    var update = function (id) {
         var url = '${base}/manage/rule/update';
-        var data = new FormData(document.getElementById("hidden-update-rule"));
+        var data = new FormData(document.getElementById("hidden-update-rule" + id));
         $.ajax({
             url: url,
             type: 'POST',

@@ -50,8 +50,6 @@
     </div>
 </div>
 <#include "/common/js.ftl"/>
-<script src="${base}/res/js/dialog/layer.js"></script>
-<script src="${base}/res/js/dialog/dialog.js"></script>
 <script>
     //前端
     var update = {

@@ -44,6 +44,21 @@ var dialog = {
 				dialog.success(result.message, result.data.url);
 			}
 		}, 'json');
+	},
+
+	onlyPost : function(url, data) {
+		$.post(url, data, function (result) {
+			if (result.status != 200) {
+				dialog.error(result.message);
+			} else {
+				layer.open({
+					content:result.message,
+					icon:1,
+					yes : function(){
+					}
+				});
+			}
+		}, 'json');
 	}
 }
 

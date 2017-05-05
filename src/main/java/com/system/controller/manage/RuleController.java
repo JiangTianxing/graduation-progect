@@ -74,7 +74,7 @@ public class RuleController {
             rule.setMd5(md5);
             rule.setStatus(FormConst.STATUS.SAVE.getValue());
             ruleService.add(rule);
-            String url = Const.PROJECT_PATH + "/manage/rule/save";
+            String url = Const.PROJECT_PATH + "/manage/rule/";
             Map<String, Object> data = new HashMap<>();
             data.put("url", url);
             return Result.returnJson(HttpStatus.SUCCESS, "提交成功", data);

@@ -12,4 +12,6 @@ public interface CommentDao {
     List<Comment> select(@Param("messageId") Integer id);
 
     boolean add(@Param("data") Comment data);
+
+    boolean delete(@Param("id") Integer id);
 }

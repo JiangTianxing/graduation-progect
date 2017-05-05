@@ -25,9 +25,6 @@
                 <a href="${base}/">前台首页</a>
             </li>
             <li>
-                <a href="${base}/manage/aboutUs">关于我们</a>
-            </li>
-            <li>
                 <a href="${base}/manage/logout">退出</a>
             </li>
         </ul>

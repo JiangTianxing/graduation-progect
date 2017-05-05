@@ -25,11 +25,11 @@ body { line-height: 120%; text-align: center; color:#333; padding: 20px;}
 .comment-box .myhead { float: left; width: 30px; height: 30px; margin-right: 10px;}
 .comment-box .comment-content { float: left; width: 400px; }
 .comment-box .comment-content .comment-time { color: #ccc; margin-top: 3px; line-height: 16px; position: relative;}
-.comment-box .comment-content .comment-praise { display: none; color: #369; padding-left: 17px; height: 20px; background: url("images/praise.png") no-repeat;  position: absolute; bottom: 0px; right: 44px;}
 .comment-box .comment-content .comment-operate { display: none; color: #369; height: 20px;  position: absolute; bottom: 0px; right: 10px;}
-.comment-box .comment-content:hover .comment-praise { display: inline-block;}
+.comment-box .comment-content .comment-comment { display: none; color: #369; height: 20px;  position: absolute; bottom: 0px; right: 50px;}
 .comment-box .comment-content:hover .comment-operate { display: inline-block;}
-.text-box .comment { border: 1px solid #eee; display: block; height: 15px; width: 428px; padding: 5px; resize: none; color: #ccc}
+.comment-box .comment-content:hover .comment-comment { display: inline-block;}
+.text-box .comment { border: 1px solid #eee; display: block; height: 30px; width: 428px; padding: 5px; resize: none; color: #ccc}
 .text-box .btn { display: none; float: right; width: 65px; height: 25px; border: 1px solid #0C528D; color: #fff; background: #4679AC;}
 .text-box .btn-off { border: 1px solid #ccc; color: #ccc; background: #F7F7F7;}
 .text-box .word{ display: none; float: right; margin: 7px 10px 0 0; color: #666;}

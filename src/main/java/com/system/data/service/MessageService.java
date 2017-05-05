@@ -24,7 +24,6 @@ public class MessageService {
 
     public boolean save(Message message) {
         boolean step1 = messageContentDao.add(message);
-        System.out.println("id ==== " + message.getId());
         boolean step2 = messageDao.add(message);
         return (step1 && step2);
     }
